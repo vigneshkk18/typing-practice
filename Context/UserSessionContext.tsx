@@ -15,7 +15,7 @@ export const initialStats: IStats = {
   difficulty: difficultyOptionsMap.easy,
 };
 
-export const UserSessionContext = createContext({
+export const UserSessionCtx = createContext({
   email: "",
   isLoggedIn: false,
   stats: { ...initialStats, timer: "00:00" },
@@ -28,7 +28,7 @@ export const UserSessionContext = createContext({
   resetTimer: () => {},
 });
 
-const UserSessionContextWrapper = ({ children }: any) => {
+const UserSessionCtxWrapper = ({ children }: any) => {
   const [userState, setUserState] = useState({ email: "", isLoggedIn: false });
   const [stats, setStats] = useState(initialStats);
   const { timer, timeOver, startTimer, stopTimer, resetTimer } = useTimer();
@@ -60,7 +60,7 @@ const UserSessionContextWrapper = ({ children }: any) => {
   };
 
   return (
-    <UserSessionContext.Provider
+    <UserSessionCtx.Provider
       value={{
         ...userState,
         stats: { ...stats, timer },
@@ -74,8 +74,8 @@ const UserSessionContextWrapper = ({ children }: any) => {
       }}
     >
       {children}
-    </UserSessionContext.Provider>
+    </UserSessionCtx.Provider>
   );
 };
 
-export default UserSessionContextWrapper;
+export default UserSessionCtxWrapper;

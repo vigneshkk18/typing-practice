@@ -7,23 +7,17 @@ config.autoAddCss = false;
 
 import "../styles/globals.css";
 import "../styles/keyboard.css";
-import { PlaygroundWrapper } from "../Context/PlaygroundContext";
-import UserSessionContextWrapper from "../Context/UserSessionContext";
-import KeyboardEventHandlersWrapper from "../Context/KeyboardEventHandlersContext";
+import ContextWrapper from "../Context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <UserSessionContextWrapper>
-      <PlaygroundWrapper>
-        <KeyboardEventHandlersWrapper>
-          <Head>
-            <title>Typing Practice - Practice your typing skill</title>
-            <link rel="icon" href="/typing.png" />
-          </Head>
-          <Component {...pageProps} />
-        </KeyboardEventHandlersWrapper>
-      </PlaygroundWrapper>
-    </UserSessionContextWrapper>
+    <ContextWrapper>
+      <Head>
+        <title>Typing Practice - Practice your typing skill</title>
+        <link rel="icon" href="/typing.png" />
+      </Head>
+      <Component {...pageProps} />
+    </ContextWrapper>
   );
 }
 

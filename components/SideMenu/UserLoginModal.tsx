@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { UserSessionContext } from "../../Context/UserSessionContext";
+import { UserSessionCtx } from "../../Context/UserSessionContext";
 import Modal from "../Modal/Modal";
 
 const isValidEmail = (email: string): boolean => {
@@ -15,8 +15,7 @@ const isValidEmail = (email: string): boolean => {
 };
 
 const UserLoginModal = forwardRef((_props, ref) => {
-  const { updateEmail, isLoggedIn, logOutUser } =
-    useContext(UserSessionContext);
+  const { updateEmail, isLoggedIn, logOutUser } = useContext(UserSessionCtx);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
   const emailRef = useRef<HTMLInputElement>();

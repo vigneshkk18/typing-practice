@@ -6,13 +6,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useRef } from "react";
-import { UserSessionContext } from "../../Context/UserSessionContext";
+import { UserSessionCtx } from "../../Context/UserSessionContext";
 import { ModalRef } from "../../types/IModal";
 import UserLoginModal from "./UserLoginModal";
 import UserStatsModal from "./UserStatsModal";
 
 const SideMenu = () => {
-  const { isLoggedIn } = useContext(UserSessionContext);
+  const { isLoggedIn } = useContext(UserSessionCtx);
   const userLoginModalRef = useRef<ModalRef>();
   const userStatsModalRef = useRef<ModalRef>();
 

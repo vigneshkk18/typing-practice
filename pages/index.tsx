@@ -5,7 +5,7 @@ import Header from "../components/Header/Header";
 import Playground from "../components/Playground/Playground";
 import { difficultyOptionsMap } from "../components/Playground/utils";
 import SideMenu from "../components/SideMenu/SideMenu";
-import { PlaygroundContext } from "../Context/PlaygroundContext";
+import { PlaygroundCtx } from "../Context/PlaygroundContext";
 
 interface HomeProps {
   data: string;
@@ -14,7 +14,7 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = (props) => {
   const { setParaToType, setDifficultyOptions, setDifficulty } =
-    useContext(PlaygroundContext);
+    useContext(PlaygroundCtx);
 
   useEffect(() => {
     setDifficulty(difficultyOptionsMap.easy);

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { PlaygroundContext } from "../../Context/PlaygroundContext";
+import { PlaygroundCtx } from "../../Context/PlaygroundContext";
 import { ComparisonType, ILetter } from "../../types/IPlaygroundContext";
 
 interface WordProps {
@@ -21,7 +21,7 @@ const Letter = ({
   wordIdx,
   letterIdx,
 }: LetterProps) => {
-  const { typeStatus } = useContext(PlaygroundContext);
+  const { typeStatus } = useContext(PlaygroundCtx);
 
   const showCursor =
     typeStatus.line === lineIdx &&

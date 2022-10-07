@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { apiToUrlMap } from "../../apiToUrlMap";
-import { PlaygroundContext } from "../../Context/PlaygroundContext";
-import { UserSessionContext } from "../../Context/UserSessionContext";
+import { PlaygroundCtx } from "../../Context/PlaygroundContext";
+import { UserSessionCtx } from "../../Context/UserSessionContext";
 import useFetch from "../../hooks/useFetch";
 import { ModalRef } from "../../types/IModal";
 import Keyboard from "../Keyboard/Keyboard";
@@ -12,9 +12,9 @@ import TypingContent from "./TypingContent";
 const Playground = () => {
   const playgroundSuccessModalRef = useRef<ModalRef>();
   const playgroundWarningModalRef = useRef<ModalRef>();
-  const { email, stats, timeOver, stopTimer } = useContext(UserSessionContext);
+  const { email, stats, timeOver, stopTimer } = useContext(UserSessionCtx);
   const { difficulty, typeStatus, replay, setTimeOver } =
-    useContext(PlaygroundContext);
+    useContext(PlaygroundCtx);
   const { makeRequest } = useFetch();
 
   useEffect(() => {

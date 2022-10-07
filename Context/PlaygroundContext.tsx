@@ -1,6 +1,5 @@
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useReducer,
@@ -14,13 +13,12 @@ import {
 import {
   difficultyOptionsMap,
   getWPMAndAccuracy,
-  processParagraph,
 } from "../components/Playground/utils";
 import useFetch from "../hooks/useFetch";
 import { ILetter } from "../types/IPlaygroundContext";
-import { initialStats, UserSessionContext } from "./UserSessionContext";
+import { initialStats, UserSessionCtx } from "./UserSessionContext";
 
-export const PlaygroundContext = createContext({
+export const PlaygroundCtx = createContext({
   para: [] as ILetter[][][],
   typeStatus: {
     line: 0,
@@ -52,8 +50,8 @@ export const PlaygroundContext = createContext({
   replay: async () => {},
 });
 
-export const PlaygroundWrapper = ({ children }: any) => {
-  const { stats, updateStats, resetTimer } = useContext(UserSessionContext);
+const PlaygroundCtxWrapper = ({ children }: any) => {
+  const { stats, updateStats, resetTimer } = useContext(UserSessionCtx);
   const { makeRequest } = useFetch();
 
   const [state, dispatch] = useReducer(PlaygroundReducer, initialState);
@@ -112,7 +110,7 @@ export const PlaygroundWrapper = ({ children }: any) => {
   }, [state.typeStatus.line]);
 
   return (
-    <PlaygroundContext.Provider
+    <PlaygroundCtx.Provider
       value={{
         para: state.para,
         typeStatus: state.typeStatus,
@@ -129,6 +127,8 @@ export const PlaygroundWrapper = ({ children }: any) => {
       }}
     >
       {children}
-    </PlaygroundContext.Provider>
+    </PlaygroundCtx.Provider>
   );
 };
+
+export default PlaygroundCtxWrapper;

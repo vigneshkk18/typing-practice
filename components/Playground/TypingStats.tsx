@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { apiToUrlMap, formatString } from "../../apiToUrlMap";
-import { PlaygroundContext } from "../../Context/PlaygroundContext";
+import { PlaygroundCtx } from "../../Context/PlaygroundContext";
 import useFetch from "../../hooks/useFetch";
 import { capitialize } from "../../utils/utils";
 import { difficultyOptionsMap } from "./utils";
-import { UserSessionContext } from "../../Context/UserSessionContext";
+import { UserSessionCtx } from "../../Context/UserSessionContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
@@ -25,8 +25,8 @@ const TypingStats = () => {
     setDifficulty,
     setParaToType,
     replay,
-  } = useContext(PlaygroundContext);
-  const { stats, timeOver } = useContext(UserSessionContext);
+  } = useContext(PlaygroundCtx);
+  const { stats, timeOver } = useContext(UserSessionCtx);
   const { makeRequest, cancelRequest } = useFetch();
 
   useEffect(() => {

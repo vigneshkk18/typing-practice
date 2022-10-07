@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { UserSessionContext } from "../../Context/UserSessionContext";
+import { UserSessionCtx } from "../../Context/UserSessionContext";
 import Modal from "../Modal/Modal";
 
 const UserStatsModal = forwardRef((_props, ref) => {

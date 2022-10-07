@@ -1,14 +1,13 @@
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect } from "react";
-import { PlaygroundContext } from "../../Context/PlaygroundContext";
-import { UserSessionContext } from "../../Context/UserSessionContext";
+import { PlaygroundCtx } from "../../Context/PlaygroundContext";
+import { UserSessionCtx } from "../../Context/UserSessionContext";
 import Line from "./Line";
 
 const Content = () => {
-  const { timeOver, startTimer } = useContext(UserSessionContext);
-  const { para, typeStatus, startTypingSession } =
-    useContext(PlaygroundContext);
+  const { timeOver, startTimer } = useContext(UserSessionCtx);
+  const { para, typeStatus, startTypingSession } = useContext(PlaygroundCtx);
 
   useEffect(() => {
     const lineEl = document.getElementById("line-" + typeStatus.line);

@@ -1,13 +1,8 @@
-import React, { createContext, useContext, useEffect, useRef } from "react";
-import { PlaygroundContext } from "./PlaygroundContext";
-
-export const keyboardEventHandlerCtx = createContext({
-  registerKeyboardEventHandlers: () => {},
-  removeKeyboardEventHandlers: () => {},
-});
+import React, { useContext, useEffect } from "react";
+import { PlaygroundCtx } from "../../Context/PlaygroundContext";
 
 const KeyboardEventHandlersWrapper = ({ children }: any) => {
-  const { updateUserTypeStatus } = useContext(PlaygroundContext);
+  const { updateUserTypeStatus } = useContext(PlaygroundCtx);
 
   function eventHandler(event: KeyboardEvent) {
     const { key, code } = event;
@@ -34,17 +29,7 @@ const KeyboardEventHandlersWrapper = ({ children }: any) => {
     return () => window.removeEventListener("keyup", eventHandler);
   }, []);
 
-  const registerKeyboardEventHandlers = () => {};
-
-  const removeKeyboardEventHandlers = () => {};
-
-  return (
-    <keyboardEventHandlerCtx.Provider
-      value={{ registerKeyboardEventHandlers, removeKeyboardEventHandlers }}
-    >
-      {children}
-    </keyboardEventHandlerCtx.Provider>
-  );
+  return <>{children}</>;
 };
 
 export default KeyboardEventHandlersWrapper;
