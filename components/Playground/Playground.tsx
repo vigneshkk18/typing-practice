@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { apiToUrlMap } from "../../apiToUrlMap";
+import { DifficultyCtx } from "../../Context/DifficultyContext";
 import { PlaygroundCtx } from "../../Context/PlaygroundContext";
 import { UserSessionCtx } from "../../Context/UserSessionContext";
 import useFetch from "../../hooks/useFetch";
@@ -10,12 +11,14 @@ import PlaygroundWarningModal from "./PlaygroundWarningModal";
 import TypingContent from "./TypingContent";
 
 const Playground = () => {
+  const { makeRequest } = useFetch();
+
+  const { email, stats, timeOver, stopTimer } = useContext(UserSessionCtx);
+  const { difficulty } = useContext(DifficultyCtx);
+  const { typeStatus, replay, setTimeOver } = useContext(PlaygroundCtx);
+
   const playgroundSuccessModalRef = useRef<ModalRef>();
   const playgroundWarningModalRef = useRef<ModalRef>();
-  const { email, stats, timeOver, stopTimer } = useContext(UserSessionCtx);
-  const { difficulty, typeStatus, replay, setTimeOver } =
-    useContext(PlaygroundCtx);
-  const { makeRequest } = useFetch();
 
   useEffect(() => {
     if (!typeStatus.isCompleted || typeStatus.isSessionRunning) return;
@@ -48,7 +51,7 @@ const Playground = () => {
     <div className="min-w-[1494px] border-l-separator border-r-separator border-l-[1px] border-r-[1px]">
       <PlaygroundWarningModal replay={replay} ref={playgroundWarningModalRef} />
       <PlaygroundSuccessModal
-        stats={stats}
+        stats={{ ...stats, difficulty }}
         replay={replay}
         ref={playgroundSuccessModalRef}
       />

@@ -1,64 +1,57 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { apiToUrlMap, formatString } from "../apiToUrlMap";
 import {
   initialState,
   PlaygroundReducer,
 } from "../components/Playground/PlaygroundReducer";
-import {
-  difficultyOptionsMap,
-  getWPMAndAccuracy,
-} from "../components/Playground/utils";
+import { getWPMAndAccuracy } from "../components/Playground/utils";
 import useFetch from "../hooks/useFetch";
 import { ILetter } from "../types/IPlaygroundContext";
+import { DifficultyCtx } from "./DifficultyContext";
 import { initialStats, UserSessionCtx } from "./UserSessionContext";
 
 export const PlaygroundCtx = createContext({
+  // para will be transformed into line -> words -> letters.
   para: [] as ILetter[][][],
+  setParaToType: (_para: string) => {},
+
+  // keeps track of current line, word and letter.
   typeStatus: {
     line: 0,
     word: 0,
     letter: 0,
-    typedLines: 0,
-    typedWords: 0,
+    // typedLetters to caculate wpm.
     typedLetters: 0,
-    totalLines: 0,
-    totalWords: 0,
     totalLetters: 0,
+
     progress: 0,
+    // user typed all the contents in para
     isCompleted: false,
+    // typing sessions is completed.
     isSessionRunning: false,
+    // indicates user has ran out-of-time.
     isTimeOver: false,
   },
+  // updates the user typed letter and changes the next type position.
   updateUserTypeStatus: (
     _typedLetter: string,
     _direction: "forward" | "backward"
   ) => {},
+
   startTypingSession: () => {},
   stopTypingSession: () => {},
   setTimeOver: () => {},
-  difficulty: difficultyOptionsMap.easy,
-  setDifficulty: (_diffculty: difficultyOptionsMap) => {},
-  difficultyOptions: [] as string[],
-  setDifficultyOptions: (_difficultyOptions: string[]) => {},
-  setParaToType: (_para: string) => {},
+
   replay: async () => {},
 });
 
 const PlaygroundCtxWrapper = ({ children }: any) => {
-  const { stats, updateStats, resetTimer } = useContext(UserSessionCtx);
   const { makeRequest } = useFetch();
 
+  const { stats, updateStats, resetTimer } = useContext(UserSessionCtx);
+  const { difficulty } = useContext(DifficultyCtx);
+
   const [state, dispatch] = useReducer(PlaygroundReducer, initialState);
-  const [difficulty, setDifficulty] = useState<difficultyOptionsMap>(
-    difficultyOptionsMap.easy
-  );
-  const [difficultyOptions, setDifficultyOptions] = useState<string[]>([]);
 
   const setParaToType = (para: string) => {
     dispatch({ type: "setPara", payload: { para } });
@@ -98,7 +91,6 @@ const PlaygroundCtxWrapper = ({ children }: any) => {
   };
 
   useEffect(() => {
-    if (state.typeStatus.line === 0) return;
     const { speed, accuracy } = getWPMAndAccuracy(
       state.para.slice(0, state.typeStatus.line),
       stats.timer
@@ -117,10 +109,6 @@ const PlaygroundCtxWrapper = ({ children }: any) => {
         startTypingSession,
         stopTypingSession,
         setTimeOver,
-        difficulty,
-        setDifficulty,
-        difficultyOptions,
-        setDifficultyOptions,
         setParaToType,
         updateUserTypeStatus,
         replay,

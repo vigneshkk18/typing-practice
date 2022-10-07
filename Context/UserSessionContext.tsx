@@ -1,18 +1,16 @@
-import { createContext, useEffect, useState } from "react";
-import { difficultyOptionsMap } from "../components/Playground/utils";
+import { createContext, useState } from "react";
+
 import useMount from "../hooks/useMount";
 import useTimer from "../hooks/useTimer";
 
 export interface IStats {
   speed: number;
   accuracy: number;
-  difficulty: difficultyOptionsMap;
 }
 
 export const initialStats: IStats = {
   speed: 0,
   accuracy: 0,
-  difficulty: difficultyOptionsMap.easy,
 };
 
 export const UserSessionCtx = createContext({
@@ -20,9 +18,11 @@ export const UserSessionCtx = createContext({
   isLoggedIn: false,
   stats: { ...initialStats, timer: "00:00" },
   timeOver: false,
-  updateEmail: (email: string) => {},
-  updateStats: (newStats: Partial<IStats>) => {},
+
+  updateEmail: (_email: string) => {},
+  updateStats: (_newStats: Partial<IStats>) => {},
   logOutUser: () => {},
+
   startTimer: () => {},
   stopTimer: () => {},
   resetTimer: () => {},

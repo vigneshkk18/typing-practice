@@ -1,3 +1,6 @@
+import React, { forwardRef, useImperativeHandle, useState } from "react";
+import Image from "next/image";
+
 import {
   faCircleCheck,
   faGaugeHigh,
@@ -6,15 +9,16 @@ import {
   faStopwatch20,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
-import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { IStats } from "../../Context/UserSessionContext";
-import { capitialize } from "../../utils/utils";
+
 import Modal from "../Modal/Modal";
+import { IStats } from "../../Context/UserSessionContext";
+
+import { capitialize } from "../../utils/utils";
 
 interface IPlaygroundSuccessModal {
   stats: IStats & {
     timer: string;
+    difficulty: string;
   };
   replay: () => Promise<void>;
 }

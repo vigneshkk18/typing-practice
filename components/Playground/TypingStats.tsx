@@ -13,19 +13,15 @@ import {
   faSquareCheck,
   faStopwatch20,
 } from "@fortawesome/free-solid-svg-icons";
+import { DifficultyCtx } from "../../Context/DifficultyContext";
 
 let isOnLoad = true;
 
 const TypingStats = () => {
   const [loading, setLoading] = useState(false);
-  const {
-    typeStatus,
-    difficultyOptions,
-    difficulty,
-    setDifficulty,
-    setParaToType,
-    replay,
-  } = useContext(PlaygroundCtx);
+  const { typeStatus, setParaToType, replay } = useContext(PlaygroundCtx);
+  const { difficulty, setDifficulty, difficultyOptions } =
+    useContext(DifficultyCtx);
   const { stats, timeOver } = useContext(UserSessionCtx);
   const { makeRequest, cancelRequest } = useFetch();
 

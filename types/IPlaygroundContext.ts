@@ -3,15 +3,18 @@ export enum ComparisonType {
   different = "different",
 }
 
+export enum difficultyOptionsMap {
+  easy = "easy",
+  medium = "medium",
+  hard = "hard",
+  expert = "expert",
+}
+
 export interface ITypeStatus {
   line: number;
   word: number;
   letter: number;
-  typedLines: number;
-  typedWords: number;
   typedLetters: number;
-  totalLines: number;
-  totalWords: number;
   totalLetters: number;
   progress: number;
   isCompleted: boolean;
