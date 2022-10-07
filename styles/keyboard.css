@@ -1,0 +1,77 @@
+.keyboard .keyboard-row {
+  height: 100%;
+}
+
+.keyboard .keyboard-row-0 {
+  gap: 1rem;
+}
+
+.keyboard .keyboard-row-1 {
+  gap: 1.1rem;
+}
+
+.keyboard .keyboard-row-2 {
+  gap: 0.93rem;
+}
+
+.keyboard .keyboard-row-3 {
+  gap: 1.02rem;
+}
+
+.keyboard .keyboard-row-4 {
+  gap: 1.25rem;
+}
+
+.keyboard .keyboard-row .key {
+  background-color: #FFFFFF;
+  color: black;
+  border-radius: 5px;
+  height: 60px;
+}
+
+.keyboard .keyboard-row .key.pressed {
+  background-color: orange;
+  color: #FFFFFF;
+}
+
+.keyboard .keyboard-row .group-n-v {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyboard .keyboard-row .group-delete {
+  width: 180px;
+}
+
+.keyboard .keyboard-row .group-tab {
+  width: 160px;
+}
+
+.keyboard .keyboard-row .group-caps-lock,
+.keyboard .keyboard-row .group-enter {
+  width: 170px;
+}
+
+.keyboard .keyboard-row .group-shift-left,
+.keyboard .keyboard-row .group-shift-right {
+  width: 200px;
+}
+
+.keyboard .keyboard-row .group-ctrl-left,
+.keyboard .keyboard-row .group-ctrl-right,
+.keyboard .keyboard-row .group-alt-left,
+.keyboard .keyboard-row .group-alt-right {
+  width: 90px;
+}
+
+.keyboard .keyboard-row .group-cmd-left,
+.keyboard .keyboard-row .group-cmd-right {
+  width: 100px;
+}
+
+.keyboard .keyboard-row .group-space-bar {
+  width: 500px;
+}
