@@ -2,12 +2,11 @@ import { useContext, useEffect } from "react";
 import type { GetServerSideProps, NextPage } from "next";
 
 import Header from "../components/Header/Header";
-import Playground from "../components/Playground/Playground";
 import SideMenu from "../components/SideMenu/SideMenu";
+import Playground from "../components/Playground/Playground";
 
-import { apiToUrlMap, formatString } from "../apiToUrlMap";
-import { DifficultyCtx } from "../Context/DifficultyContext";
-import { PlaygroundCtx } from "../Context/PlaygroundContext";
+import { DifficultyCtx, PlaygroundCtx } from "../Context";
+import { apiToUrlMap, baseUrl, formatString } from "../apiToUrlMap";
 
 import { difficultyOptionsMap } from "../types/IPlaygroundContext";
 
@@ -44,12 +43,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const reqUrl = formatString(apiToUrlMap.generateParagraph, {
     difficulty: difficultyOptionsMap.easy,
   });
-  const res = await fetch(reqUrl)
+  const options = {
+    headers: {
+      Authorization: "Bearer " + process.env.SECRET_KEY,
+    },
+  };
+  const res = await fetch(`${baseUrl}${reqUrl}`, options)
     .then((res) => res.json())
     .catch(console.error);
 
   const { data: difficultyOptions } = await fetch(
-    apiToUrlMap.getDifficultyOptions
+    `${baseUrl}${apiToUrlMap.getDifficultyOptions}`,
+    options
   )
     .then((res) => res.json())
     .catch(console.error);

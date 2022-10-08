@@ -104,7 +104,13 @@ const PlaygroundSuccessModal = forwardRef(
           confirmLabel: (
             <span className="flex gap-2 items-center justify-center">
               {loading ? (
-                <Image src="/loading.svg" alt="loading" />
+                <Image
+                  className="animate-spin text-white"
+                  width="20"
+                  height="20"
+                  src="/loading.svg"
+                  alt="loading"
+                />
               ) : (
                 <FontAwesomeIcon icon={faPlay} />
               )}

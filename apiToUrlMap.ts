@@ -1,14 +1,12 @@
 import { keys } from "./utils/utils";
 
+export const baseUrl = "https://go-api-service-vxrt.onrender.com";
+
 export const apiToUrlMap = {
-  getDifficultyOptions:
-    "https://go-api-service-vxrt.onrender.com/generate-paragraph/difficulty-options",
-  generateParagraph:
-    "https://go-api-service-vxrt.onrender.com/generate-paragraph/{difficulty}",
-  createUserActivity:
-    "https://go-api-service-vxrt.onrender.com/typing-practice/user-activity",
-  getUserActivity:
-    "https://go-api-service-vxrt.onrender.com/typing-practice/user-activity/{emailId}",
+  getDifficultyOptions: "/generate-paragraph/difficulty-options",
+  generateParagraph: "/generate-paragraph/{difficulty}",
+  createUserActivity: "/typing-practice/user-activity",
+  getUserActivity: "/typing-practice/user-activity/{emailId}",
 };
 
 export const formatString = (str: string, value: Record<string, any>) => {
