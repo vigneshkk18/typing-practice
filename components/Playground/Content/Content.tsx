@@ -1,9 +1,11 @@
+import React, { useContext, useEffect } from "react";
+
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useEffect } from "react";
-import { PlaygroundCtx } from "../../Context/PlaygroundContext";
-import { UserSessionCtx } from "../../Context/UserSessionContext";
+
 import Line from "./Line";
+
+import { PlaygroundCtx, UserSessionCtx } from "../../../Context";
 
 const Content = () => {
   const { timeOver, startTimer } = useContext(UserSessionCtx);

@@ -1,3 +1,5 @@
+import React, { useContext, useRef } from "react";
+
 import {
   faChartLine,
   faLock,
@@ -5,11 +7,13 @@ import {
   faUserCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useRef } from "react";
-import { UserSessionCtx } from "../../Context/UserSessionContext";
-import { ModalRef } from "../../types/IModal";
+
 import UserLoginModal from "./UserLoginModal";
 import UserStatsModal from "./UserStatsModal";
+
+import { UserSessionCtx } from "../../Context/UserSessionContext";
+
+import { ModalRef } from "../../types/IModal";
 
 const SideMenu = () => {
   const { isLoggedIn } = useContext(UserSessionCtx);
@@ -32,11 +36,9 @@ const SideMenu = () => {
           icon={isLoggedIn ? faUserCheck : faUser}
           color={isLoggedIn ? "green" : ""}
         />
-        {isLoggedIn ? (
-          <span className="font-bold text-lg">Signed In</span>
-        ) : (
-          <span className="font-bold text-lg">Sign In</span>
-        )}
+        <span className="font-bold text-lg">
+          {isLoggedIn ? "Signed In" : "Sign In"}
+        </span>
       </button>
       <hr className="my-8 border-b-[1px] border-separator" />
       <div className="relative">

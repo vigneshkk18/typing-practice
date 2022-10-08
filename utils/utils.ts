@@ -27,3 +27,9 @@ export const getMinsFromString = (timeStr: string) => {
   const [min, sec] = timeStr.split(":").map((str) => +str);
   return getMins(min, sec);
 };
+
+export const isValidEmail = (email: string): boolean => {
+  return /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<.test>()[\]\.,;:\s@\"]{2,})$/i.test(
+    email
+  );
+};

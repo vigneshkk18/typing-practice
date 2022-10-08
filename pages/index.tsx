@@ -1,11 +1,14 @@
-import type { GetServerSideProps, NextPage } from "next";
 import { useContext, useEffect } from "react";
-import { apiToUrlMap, formatString } from "../apiToUrlMap";
+import type { GetServerSideProps, NextPage } from "next";
+
 import Header from "../components/Header/Header";
 import Playground from "../components/Playground/Playground";
 import SideMenu from "../components/SideMenu/SideMenu";
+
+import { apiToUrlMap, formatString } from "../apiToUrlMap";
 import { DifficultyCtx } from "../Context/DifficultyContext";
 import { PlaygroundCtx } from "../Context/PlaygroundContext";
+
 import { difficultyOptionsMap } from "../types/IPlaygroundContext";
 
 interface HomeProps {

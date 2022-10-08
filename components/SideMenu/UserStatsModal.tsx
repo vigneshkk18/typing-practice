@@ -1,5 +1,4 @@
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { UserSessionCtx } from "../../Context/UserSessionContext";
 import Modal from "../Modal/Modal";
 
 const UserStatsModal = forwardRef((_props, ref) => {
@@ -13,11 +12,11 @@ const UserStatsModal = forwardRef((_props, ref) => {
     closeModal,
   }));
 
+  if (!open) return null;
+
   const title = <h1 className="text-5xl text-center mb-4">Comming Soon...</h1>;
 
   const content = <></>;
-
-  if (!open) return null;
 
   return (
     <Modal

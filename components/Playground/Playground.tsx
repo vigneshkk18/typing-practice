@@ -1,27 +1,33 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { apiToUrlMap } from "../../apiToUrlMap";
-import { DifficultyCtx } from "../../Context/DifficultyContext";
-import { PlaygroundCtx } from "../../Context/PlaygroundContext";
-import { UserSessionCtx } from "../../Context/UserSessionContext";
-import useFetch from "../../hooks/useFetch";
-import { ModalRef } from "../../types/IModal";
+
+import TypingContent from "./Content";
 import Keyboard from "../Keyboard/Keyboard";
 import PlaygroundSuccessModal from "./PlaygroundSuccessModal";
 import PlaygroundWarningModal from "./PlaygroundWarningModal";
-import TypingContent from "./TypingContent";
+
+import useFetch from "../../hooks/useFetch";
+
+import { apiToUrlMap } from "../../apiToUrlMap";
+import { DifficultyCtx, PlaygroundCtx, UserSessionCtx } from "../../Context";
+
+import { ModalRef } from "../../types/IModal";
+import { isTimerOver, isUserCompleted, isUserTyping } from "../../utils/rules";
 
 const Playground = () => {
-  const { makeRequest } = useFetch();
+  const { makeRequest, cancelRequest } = useFetch();
 
-  const { email, stats, timeOver, stopTimer } = useContext(UserSessionCtx);
   const { difficulty } = useContext(DifficultyCtx);
   const { typeStatus, replay, setTimeOver } = useContext(PlaygroundCtx);
+  const { email, stats, timeOver, stopTimer } = useContext(UserSessionCtx);
 
   const playgroundSuccessModalRef = useRef<ModalRef>();
   const playgroundWarningModalRef = useRef<ModalRef>();
 
+  // save user stats once session is completed and user has typed all para. Then open modal.
   useEffect(() => {
-    if (!typeStatus.isCompleted || typeStatus.isSessionRunning) return;
+    if (!isUserCompleted(typeStatus)) return;
+    playgroundSuccessModalRef.current?.openModal();
+    stopTimer();
     makeRequest(apiToUrlMap.createUserActivity, {
       method: "POST",
       body: JSON.stringify({
@@ -32,17 +38,13 @@ const Playground = () => {
         difficulty,
       }),
     });
+
+    return () => cancelRequest();
   }, [typeStatus, stats]);
 
+  // if user exceeds time and session is running. Then show warning modal.
   useEffect(() => {
-    if (typeStatus.isSessionRunning || !typeStatus.isCompleted) return;
-    playgroundSuccessModalRef.current?.openModal();
-    stopTimer();
-  }, [typeStatus.isSessionRunning, typeStatus.isCompleted]);
-
-  useEffect(() => {
-    if (!typeStatus.isSessionRunning || typeStatus.isCompleted || !timeOver)
-      return;
+    if (!isTimerOver(typeStatus, timeOver)) return;
     setTimeOver();
     playgroundWarningModalRef.current?.openModal();
   }, [typeStatus.isSessionRunning, typeStatus.isCompleted, timeOver]);

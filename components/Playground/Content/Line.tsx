@@ -1,6 +1,8 @@
 import React from "react";
-import { ILetter } from "../../types/IPlaygroundContext";
+
 import Word from "./Word";
+
+import { ILetter } from "../../../types/IPlaygroundContext";
 
 interface LineProps {
   line: ILetter[][];

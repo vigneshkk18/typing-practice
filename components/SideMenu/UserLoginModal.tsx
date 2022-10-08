@@ -5,14 +5,11 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { UserSessionCtx } from "../../Context/UserSessionContext";
+
 import Modal from "../Modal/Modal";
 
-const isValidEmail = (email: string): boolean => {
-  return /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<.test>()[\]\.,;:\s@\"]{2,})$/i.test(
-    email
-  );
-};
+import { isValidEmail } from "../../utils/utils";
+import { UserSessionCtx } from "../../Context/UserSessionContext";
 
 const UserLoginModal = forwardRef((_props, ref) => {
   const { updateEmail, isLoggedIn, logOutUser } = useContext(UserSessionCtx);
@@ -55,21 +52,17 @@ const UserLoginModal = forwardRef((_props, ref) => {
     closeModal,
   }));
 
+  if (!open) return null;
+
   const title = <h1 className="text-5xl text-center mb-4">Login</h1>;
 
   const content = (
     <div className="flex flex-col gap-2 mt-4">
-      {isLoggedIn ? (
-        <span>
-          If you proceed with a logout, future typing practise sessions won't be
-          recorded.
-        </span>
-      ) : (
-        <span>
-          Login to save your progress, view your stats, and see where you stand
-          among the others.
-        </span>
-      )}
+      <span>
+        {isLoggedIn
+          ? "If you proceed with a logout, future typing practise sessions won't be recorded."
+          : "Login to save your progress, view your stats, and see where you stand among the others."}
+      </span>
       {!isLoggedIn && (
         <>
           <label className={error ? "text-red-500" : ""} htmlFor="email">
@@ -89,8 +82,6 @@ const UserLoginModal = forwardRef((_props, ref) => {
       )}
     </div>
   );
-
-  if (!open) return null;
 
   return (
     <Modal

@@ -1,24 +1,5 @@
+import React from "react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import { values } from "../../utils/utils";
-
-type IObj = {
-  [key: number]: {
-    char: string;
-    typed: boolean;
-  };
-};
-
-const resetTypeState = (text: string) => {
-  const obj = text.split("").reduce((obj, char, index) => {
-    obj[index] = {
-      char,
-      typed: false,
-    };
-    return obj;
-  }, {} as IObj);
-  return obj;
-};
 
 const Header = () => {
   return (

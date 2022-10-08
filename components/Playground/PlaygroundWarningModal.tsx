@@ -1,14 +1,9 @@
-import {
-  faCircleCheck,
-  faGaugeHigh,
-  faLayerGroup,
-  faPlay,
-  faStopwatch20,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { capitialize } from "../../utils/utils";
+import Image from "next/image";
+
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import Modal from "../Modal/Modal";
 
 interface IPlaygroundWarningModal {

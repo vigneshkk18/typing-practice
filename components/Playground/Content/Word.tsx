@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
-import { PlaygroundCtx } from "../../Context/PlaygroundContext";
-import { ComparisonType, ILetter } from "../../types/IPlaygroundContext";
+
+import { PlaygroundCtx } from "../../../Context";
+
+import { ComparisonType, ILetter } from "../../../types/IPlaygroundContext";
 
 interface WordProps {
   word: ILetter[];

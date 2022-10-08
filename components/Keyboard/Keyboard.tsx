@@ -1,7 +1,9 @@
 import React from "react";
-import KeyboardEventHandler from "./KeyboardEventHandler";
+
 import KeyboardRow from "./KeyboardRow";
+
 import { KeyboardKeys } from "./utils";
+import KeyboardEventHandler from "./KeyboardEventHandler";
 
 const Keyboard = () => {
   return (

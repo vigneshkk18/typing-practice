@@ -14,3 +14,7 @@ const ContextWrapper = ({ children }: any) => {
 };
 
 export default ContextWrapper;
+
+export { DifficultyCtx } from "./DifficultyContext";
+export { PlaygroundCtx } from "./PlaygroundContext";
+export { UserSessionCtx } from "./UserSessionContext";

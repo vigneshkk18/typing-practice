@@ -12,11 +12,7 @@ export const initialState = {
     line: 0,
     word: 0,
     letter: 0,
-    typedLines: 0,
-    typedWords: 0,
     typedLetters: 0,
-    totalLines: 0,
-    totalWords: 0,
     totalLetters: 0,
     progress: 0,
     isCompleted: false,
@@ -46,21 +42,18 @@ export function PlaygroundReducer(state = initialState, action: Action) {
   switch (action.type) {
     case "setPara": {
       if (!action.payload || !action.payload.para) return { ...state };
-      const { para, totalLines, totalWords, totalLetters } = processParagraph(
-        action.payload.para
-      );
+      const { para, totalLetters } = processParagraph(action.payload.para);
       return {
         ...state,
         para,
         typeStatus: {
           ...state.typeStatus,
-          totalLines,
-          totalWords,
           totalLetters,
         },
       };
     }
     case "updatePara":
+      // pervent update if session is not running or time is over.
       if (
         !action.payload ||
         !action.payload.typedLetter ||
@@ -82,6 +75,7 @@ export function PlaygroundReducer(state = initialState, action: Action) {
       }
       return { ...state, para: updatedPara };
     case "updateTypeStatus":
+      // prevent update type status if session is not running or timer is over.
       if (
         !action.payload ||
         !state.typeStatus.isSessionRunning ||
@@ -113,16 +107,12 @@ export function PlaygroundReducer(state = initialState, action: Action) {
       };
     case "reset":
       if (!action.payload || !action.payload.para) return { ...initialState };
-      const { para, totalLines, totalWords, totalLetters } = processParagraph(
-        action.payload.para
-      );
+      const { para, totalLetters } = processParagraph(action.payload.para);
       return {
         ...initialState,
         para,
         typeStatus: {
           ...initialState.typeStatus,
-          totalLines,
-          totalWords,
           totalLetters,
         },
       };

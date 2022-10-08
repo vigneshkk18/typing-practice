@@ -5,9 +5,10 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
 
+import ContextWrapper from "../Context";
+
 import "../styles/globals.css";
 import "../styles/keyboard.css";
-import ContextWrapper from "../Context";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

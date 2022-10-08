@@ -38,7 +38,7 @@ export const getWPMAndAccuracy = (para: ILetter[][][], time: string) => {
     getTotalAndCorrectWordsCount(para);
   const [min, sec] = time.split(":").map((str) => +str);
 
-  const speed = +(typedChars / 5 / getMins(min, sec)).toFixed(2);
-  const accuracy = +((correctWords / totalWords) * 100).toFixed(2);
+  const speed = +(typedChars / 5 / getMins(min, sec) || 0).toFixed(2);
+  const accuracy = +((correctWords / totalWords) * 100 || 0).toFixed(2);
   return { speed, accuracy };
 };
