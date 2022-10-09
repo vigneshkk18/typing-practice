@@ -26,20 +26,31 @@ const Playground = () => {
   // save user stats once session is completed and user has typed all para. Then open modal.
   useEffect(() => {
     if (!isUserCompleted(typeStatus)) return;
+    const timer = setTimeout(
+      () =>
+        makeRequest(apiToUrlMap.createUserActivity, {
+          method: "POST",
+          body: JSON.stringify({
+            email: email.trim() !== "" ? email : "Default User",
+            completedIn: stats.timer,
+            accuracy: stats.accuracy,
+            wpm: stats.speed,
+            difficulty,
+          }),
+        }),
+      1000
+    );
+
+    return () => {
+      clearTimeout(timer);
+      cancelRequest();
+    };
+  }, [typeStatus, stats]);
+
+  useEffect(() => {
+    if (!isUserCompleted(typeStatus)) return;
     playgroundSuccessModalRef.current?.openModal();
     stopTimer();
-    makeRequest(apiToUrlMap.createUserActivity, {
-      method: "POST",
-      body: JSON.stringify({
-        email: email.trim() !== "" ? email : "Default User",
-        completedIn: stats.timer,
-        accuracy: stats.accuracy,
-        wpm: stats.speed,
-        difficulty,
-      }),
-    });
-
-    return () => cancelRequest();
   }, [typeStatus, stats]);
 
   // if user exceeds time and session is running. Then show warning modal.
