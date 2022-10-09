@@ -33,3 +33,5 @@ export const isValidEmail = (email: string): boolean => {
     email
   );
 };
+
+export const getDateStr = () => new Date().toISOString().slice(0, 10);

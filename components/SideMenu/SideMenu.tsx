@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 
 import {
   faChartLine,
@@ -16,17 +16,21 @@ import { UserSessionCtx } from "../../Context/UserSessionContext";
 import { ModalRef } from "../../types/IModal";
 
 const SideMenu = () => {
-  const { isLoggedIn } = useContext(UserSessionCtx);
+  const { email, isLoggedIn } = useContext(UserSessionCtx);
+  const [openStatsModal, setOpenStatsModal] = useState(false);
+
   const userLoginModalRef = useRef<ModalRef>();
-  const userStatsModalRef = useRef<ModalRef>();
 
   const openUserLoginModal = () => userLoginModalRef.current?.openModal();
-  const openUserStatsModal = () => userStatsModalRef.current?.openModal();
+  const openUserStatsModal = () => setOpenStatsModal(true);
+  const closeUserStatsModal = () => setOpenStatsModal(false);
 
   return (
     <div className="min-w-[197px] h-full flex flex-col">
       <UserLoginModal ref={userLoginModalRef} />
-      <UserStatsModal ref={userStatsModalRef} />
+      {openStatsModal && (
+        <UserStatsModal email={email} closeModal={closeUserStatsModal} />
+      )}
       <button
         onClick={openUserLoginModal}
         className="h-[50px] w-full mt-8 p-8 flex items-center gap-4"

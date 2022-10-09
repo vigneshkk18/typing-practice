@@ -6,7 +6,7 @@ export const apiToUrlMap = {
   getDifficultyOptions: "/generate-paragraph/difficulty-options",
   generateParagraph: "/generate-paragraph/{difficulty}",
   createUserActivity: "/typing-practice/user-activity",
-  getUserActivity: "/typing-practice/user-activity/{emailId}",
+  getUserActivity: "/typing-practice/user-activity/{emailId}/stats",
 };
 
 export const formatString = (str: string, value: Record<string, any>) => {
