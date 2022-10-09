@@ -4,6 +4,7 @@ import {
   IActivityKeys,
 } from "../../types/IStatsModal";
 import { BackgroundColors } from "../../utils/constants";
+import { capitialize } from "../../utils/utils";
 
 export const getChartData = (
   stats: IActivity[] | undefined,
@@ -20,7 +21,9 @@ export const getChartData = (
     };
   }
 
-  const labels = stats?.map((_, idx) => `Activity-${idx}`);
+  const labels = stats?.map(
+    (stat, idx) => `${capitialize(stat.difficulty)}: Activity-${idx}`
+  );
   return {
     labels,
     datasets: [

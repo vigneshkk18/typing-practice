@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import Image from "next/image";
 
 import {
   faCircleCheck,
@@ -20,11 +21,14 @@ import { isTimerOver, isUserCompleted } from "../../utils/rules";
 let isOnLoad = true;
 
 const TypingStats = () => {
+  const { makeRequest, cancelRequest } = useFetch();
+
   const { typeStatus, setParaToType, replay } = useContext(PlaygroundCtx);
   const { difficulty, setDifficulty, difficultyOptions } =
     useContext(DifficultyCtx);
   const { stats, timeOver } = useContext(UserSessionCtx);
-  const { makeRequest, cancelRequest } = useFetch();
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isOnLoad) {
@@ -49,9 +53,11 @@ const TypingStats = () => {
   const onDifficultyChange: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
+    setLoading(true);
     setDifficulty(
       difficultyOptionsMap[event.target.value as difficultyOptionsMap]
     );
+    setLoading(false);
   };
 
   return (
@@ -84,6 +90,15 @@ const TypingStats = () => {
               </option>
             ))}
           </select>
+          {loading && (
+            <Image
+              className={`animate-spin`}
+              width="20"
+              height="20"
+              src="/loading.svg"
+              alt="loading"
+            />
+          )}
         </div>
         <div className="flex items-center gap-4">
           <span className="text-faded text-xl">Time (mm:ss): </span>

@@ -25,7 +25,7 @@ const Playground = () => {
 
   // save user stats once session is completed and user has typed all para. Then open modal.
   useEffect(() => {
-    if (!isUserCompleted(typeStatus)) return;
+    if (!isUserCompleted(typeStatus) || !email || email == "") return;
     const timer = setTimeout(
       () =>
         makeRequest(apiToUrlMap.createUserActivity, {
